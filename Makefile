@@ -7,5 +7,5 @@ run:
 	./clothSimV2
 push:
 	git add ./header ./source ./scripts/header ./scripts/source ./fonts ./Makefile ./README.md
-	git commit -a -m "1.1"
+	git commit -a -m "Readme Update"
 	git push origin main
