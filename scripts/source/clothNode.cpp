@@ -11,20 +11,12 @@ int sgn(float x) { return (0 < x) - (x < 0); }
 
 void clothNode::draw()
 {
-    Render::setColor({ 255, 0, 0, 0 });
+    Render::setColor(c);
     Render::fillRect(x - 1, y - 1, 3, 3);
-
-    for (int i = 0; i < conAmnt; i++)
-    {
-        Render::drawLine(x, y, cons[i]->x, cons[i]->y);
-    }
 }
 
 void clothNode::update()
 {
-    Render::setColor({ 255, 0, 0, 0 });
-    Render::fillRect(x - 2, y - 2, 4, 4);
-
     if (!fixed)
     {
         float tx = 0, ty = 0;
