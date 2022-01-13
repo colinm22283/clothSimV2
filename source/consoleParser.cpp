@@ -14,6 +14,7 @@ std::string bindMap[255];
 bool ConsoleParser::parse(std::string code)
 {
     std::string first = code.substr(0, code.find(' '));
+    std::string nstr = code.substr(code.find(' ') + 1);
 
     if (first == "exit")
     {
@@ -21,7 +22,6 @@ bool ConsoleParser::parse(std::string code)
     }
     else if (first == "set")
     {
-        std::string nstr = code.substr(code.find(' ') + 1);
         std::string second = nstr.substr(0, nstr.find(' '));
         std::string nstr2 = nstr.substr(nstr.find(' ') + 1);
         std::string third = nstr2.substr(0, nstr2.find(' '));
@@ -44,11 +44,10 @@ bool ConsoleParser::parse(std::string code)
         else if (second == "fpslimit") Global::fpsLimit = std::stoi(third);
         else if (second == "fpsoutput") Global::fpsOutput = third == "true";
         else if (second == "printkeys") Global::printKeys = third == "true";
-        else Console::print("Variable \"" + second + "\" does not exist.");
+        else if (!Script::setVar(second, third)) Console::print("Variable \"" + second + "\" does not exist.");
     }
     else if (first == "bind")
     {
-        std::string nstr = code.substr(code.find(' ') + 1);
         std::string second = nstr.substr(0, nstr.find(' '));
         std::string third = nstr.substr(nstr.find(' ') + 1);
 
@@ -58,7 +57,7 @@ bool ConsoleParser::parse(std::string code)
     {
         Console::print(std::to_string(Engine::currentTime));
     }
-    else
+    else if (!Script::command(first, nstr))
     {
         Console::print("Command not found \"" + first + "\"");
         return false;

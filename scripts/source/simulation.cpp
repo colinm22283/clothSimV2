@@ -23,16 +23,29 @@ void Simulation::update()
     }
 }
 
+void Simulation::deleteGrid()
+{
+    free(grid);
+
+    // for (int x = 0; x < gridWidth; x++)
+    // {
+    //     for (int y = 0; y < gridHeight; y++)
+    //     {
+    //         std::cout << grid[x][y].conAmnt << "\n";
+    //         free(grid[x][y].cons);
+    //     }
+    //     free(grid[x]);
+    // }
+}
 void Simulation::generateGrid(float _x, float _y, float w, float h, float spacing)
 {
     gridWidth = floor((w - _x) / spacing) + 1;
     gridHeight = floor((h - _y) / spacing) + 1;
 
     grid = (clothNode**)malloc(sizeof(clothNode*) * gridWidth);
-    for (int i = 0; i < gridWidth; i++) grid[i] = (clothNode*)malloc(sizeof(clothNode) * gridHeight);
-
     for (int x = 0; x < gridWidth; x++)
     {
+        grid[x] = (clothNode*)malloc(sizeof(clothNode) * gridHeight);
         for (int y = 0; y < gridHeight; y++)
         {
             grid[x][y] = {
@@ -89,3 +102,6 @@ void Simulation::createForce(float _x, float _y, float multiplier)
         }
     }
 }
+
+void Simulation::pin(int x, int y) { grid[x][y].fixed = true; }
+void Simulation::unpin(int x, int y) { grid[x][y].fixed = false; }
