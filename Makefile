@@ -6,6 +6,6 @@ compile:
 run:
 	./clothSimV2
 push:
-	git add ./header ./source ./scripts/header ./scripts/source ./fonts ./Makefile ./README.md
+	git add ./header ./source ./scripts/header ./scripts/source ./fonts ./img ./Makefile ./README.md
 	git commit -a -m "Readme Update"
 	git push origin main
