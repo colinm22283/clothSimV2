@@ -19,6 +19,6 @@ public:
     void draw();
     void draw(int x, int y);
     void draw(int x, int y, float scale);
-//protected:
+protected:
     color** pixels;
 };

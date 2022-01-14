@@ -23,8 +23,13 @@ void Script::exit()
 
 void Script::keyDown(SDL_Keysym keysym) { }
 
+bmp testImage;
+
 void Script::start()
 {
+    testImage("img/usa.bmp");
+    testImage.resize(0.5, 1);
+
     Global::fpsLimit = 1000;
     Global::fpsOutput = true;
 
@@ -51,6 +56,8 @@ void Script::update()
     Render::clearScreen({ 255, 255, 255, 255 });
     
     Simulation::update();
+
+    testImage.draw();
 }
 
 void Script::mouseDown(int button)

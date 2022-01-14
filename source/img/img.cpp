@@ -13,6 +13,9 @@ img::img(int _width, int _height)
 {
     width = _width;
     height = _height;
+
+    pixels = (color**)malloc(sizeof(color*) * width);
+    for (int x = 0; x < width; x++) pixels[x] = (color*)malloc(sizeof(color) * height);
 }
 
 img::~img()
