@@ -9,6 +9,7 @@ namespace SimConfig
     extern float decay;
     extern float maxForce;
     extern float gravity;
+    extern float wind;
 
     extern float vx;
     extern float vy;

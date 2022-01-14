@@ -7,6 +7,7 @@ float SimConfig::lineLength = 10;
 float SimConfig::decay = 0.2;
 float SimConfig::maxForce = 0.5;
 float SimConfig::gravity = 0.01;
+float SimConfig::wind = 0.05;
 
 float SimConfig::vx = 0;
 float SimConfig::vy = 0;

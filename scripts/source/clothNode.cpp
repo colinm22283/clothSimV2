@@ -1,5 +1,6 @@
 #include <math.h>
 #include <iostream>
+#include <random>
 
 #include <render.h>
 
@@ -42,7 +43,7 @@ void clothNode::update()
         vx *= SimConfig::decay;
         vy *= SimConfig::decay;
 
-        vx += ax;
+        vx += ax + ((float)std::rand() / (float)RAND_MAX * SimConfig::wind);
         vy += ay + SimConfig::gravity;
     }
 }

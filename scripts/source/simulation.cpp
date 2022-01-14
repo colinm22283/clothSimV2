@@ -7,7 +7,7 @@
 #include <simulation.h>
 #include <simConfig.h>
 #include <connection.h>
-#include <bmp.h>
+#include <img/bmp.h>
 
 int Simulation::gridWidth = 0;
 int Simulation::gridHeight = 0;
@@ -41,7 +41,18 @@ void Simulation::update()
 
 void Simulation::deleteGrid()
 {
+    gridWidth = 0;
+    gridHeight = 0;
+    for (int x = 0; x < gridWidth; x++){
+        for (int y = 0; y < gridHeight; y++)
+        {
+            grid[x][y].conAmnt = 0;
+            free(grid[x][y].cons);
+        }
+        free(grid[x]);
+    }
     free(grid);
+    conAmnt = 0;
     free(cons);
 }
 void Simulation::generateGrid(float _x, float _y, float w, float h, float spacing)
@@ -142,15 +153,16 @@ void Simulation::createForce(float _x, float _y, float multiplier)
 void Simulation::pin(int x, int y) { grid[x][y].fixed = true; }
 void Simulation::unpin(int x, int y) { grid[x][y].fixed = false; }
 void Simulation::setColor(int x, int y, color c) { grid[x][y].c = c; }
+
 void Simulation::loadImage(std::string path)
 {
-    bmp img = BMP::loadImage(path);
+    bmp i(path.c_str());
 
-    for (int x = 0; x < img.width; x++)
+    for (int x = 0; x < std::min(i.width, gridWidth); x++)
     {
-        for (int y = 0; y < img.height; y++)
+        for (int y = 0; y < std::min(i.height, gridHeight); y++)
         {
-            Simulation::setColor(x, y, img.pixels[x][y]);
+            Simulation::setColor(x, y, i.getPixel(x, y));
         }
     }
 }

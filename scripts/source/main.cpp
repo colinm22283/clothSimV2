@@ -12,7 +12,7 @@
 
 #include <simulation.h>
 #include <simConfig.h>
-#include <bmp.h>
+#include <img/bmp.h>
 
 void Script::exit()
 {
@@ -28,16 +28,21 @@ void Script::start()
     Global::fpsLimit = 1000;
     Global::fpsOutput = true;
 
-    Simulation::generateGrid(50, 50, 650, 350, 10);
+    Simulation::generateGrid(50, 50, 350, 350, 10);
 
     Simulation::grid[0][0].fixed = true;
-    Simulation::grid[10][0].fixed = true;
-    Simulation::grid[20][0].fixed = true;
-    Simulation::grid[30][0].fixed = true;
-    Simulation::grid[40][0].fixed = true;
-    Simulation::grid[50][0].fixed = true;
-    Simulation::grid[60][0].fixed = true;
+    Simulation::grid[0][5].fixed = true;
+    Simulation::grid[0][10].fixed = true;
+    Simulation::grid[0][15].fixed = true;
+    Simulation::grid[0][20].fixed = true;
+    Simulation::grid[0][25].fixed = true;
     Simulation::grid[0][30].fixed = true;
+    // Simulation::grid[10][0].fixed = true;
+    // Simulation::grid[20][0].fixed = true;
+    // Simulation::grid[30][0].fixed = true;
+    // Simulation::grid[40][0].fixed = true;
+    // Simulation::grid[50][0].fixed = true;
+    // Simulation::grid[60][0].fixed = true;
 
     Simulation::loadImage("img/usa.bmp");
 }
@@ -60,6 +65,7 @@ bool Script::setVar(std::string var, std::string value)
     if (var == "linelength") SimConfig::lineLength = std::stof(value);
     else if (var == "decay") SimConfig::decay = std::stof(value);
     else if (var == "gravity") SimConfig::gravity = std::stof(value);
+    else if (var == "wind") SimConfig::wind = std::stof(value);
     else return false;
     return true;
 }
